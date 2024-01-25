@@ -39,7 +39,6 @@ export class UsersComponent implements AfterViewInit{
     this.users = await this.userService.getUsers() || [];
     if (this.addUser) {
       this.users.unshift({...this.addUser})
-      console.log('user = ', this.users.length);
       
     }
   
