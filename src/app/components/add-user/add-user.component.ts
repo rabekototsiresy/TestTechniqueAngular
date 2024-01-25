@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-add-user',
@@ -15,17 +16,24 @@ export class AddUserComponent implements OnInit {
     username: ['', Validators.required],
     name: ['', Validators.required],
     phone: [''],
-    site: [''],
+    website: [''],
 });
 
-  constructor(private _formBuilder: FormBuilder, private router: Router) { }
+  constructor(private _formBuilder: FormBuilder, private router: Router, private userService: UsersService) { }
 
   ngOnInit(): void {
   }
 
   addUser() {
     if (this.addForm.valid) {
-      this.router.navigate(["/users"], {state: { newData: this.addForm.value }})
+      this.userService.addUser(this.addForm.value).subscribe(res => {
+        if (res) {
+          console.log('res = ', res);
+          // this.router.navigate(["/users"]);
+          this.router.navigate(["/users"], {state: { newData: this.addForm.value }})
+          
+        }
+      })
     }
     
   }

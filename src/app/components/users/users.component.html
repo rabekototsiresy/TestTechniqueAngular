@@ -1,5 +1,5 @@
 <div>
-  <h1>Liste des utilisateurs !</h1>
+  <h1>Liste des utilisateurs</h1>
   <div>
     <table class="table">
       <thead>
@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of users; let index = index;">
-          <td> {{ index }}</td>
+          <td> {{ index + 1 }}</td>
           <td> {{ user.email }}</td>
           <td> {{ user.name }}</td>
           <td> {{ user.phone }}</td>

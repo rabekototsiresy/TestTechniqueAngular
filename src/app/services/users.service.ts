@@ -12,4 +12,8 @@ export class UsersService {
   getUsers() {
     return this._http.get<any[]>(`${environment.baseUser}/users`).toPromise();
   }
+
+  addUser(data: any) {
+    return this._http.post<any>(`${environment.baseUser}/users`, {data});
+  }
 }

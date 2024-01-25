@@ -7,9 +7,9 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () => import('./components/users/users.module').then(x => x.UsersModule)
   }, {
-    path: '', redirectTo: 'users', pathMatch: 'full'
+    path: '', redirectTo: '/users', pathMatch: 'full'
   }, 
-  // {path: '**', component: NotFoundComponent}
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({

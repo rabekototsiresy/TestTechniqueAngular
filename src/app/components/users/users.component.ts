@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -8,29 +8,42 @@ import { UsersService } from 'src/app/services/users.service';
   styles: [
   ]
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements AfterViewInit{
 
   users: any[] = [];
+  addUser: any = null;
 
   constructor(private userService: UsersService, private router: Router) {
     if (this.router.getCurrentNavigation()) {
-      console.log(this.router.getCurrentNavigation()?.extras.state); // should log out 'bar'
-      const { newData } = this.router.getCurrentNavigation()?.extras.state as any;
-      
-      this.users.push({
-        ...newData
-      })
+      const data = this.router.getCurrentNavigation()?.extras.state;
+      if (data) {
+        const { newData } = this.router.getCurrentNavigation()?.extras.state as any;
+        
+        this.addUser = newData;
+      }
     }
 
   }
 
 
 
-  async ngOnInit(): Promise<void> {
+  // ngOnInit(): void {
+  //   this.users.unshift({
+  //     ...this.addUser 
+  //   })
+  
+  //   console.log("le = ", this.users.length);
+  // }
+  
+  async ngAfterViewInit(): Promise<void> {
     this.users = await this.userService.getUsers() || [];
-
-    console.log('users = ', this.users);
-    
+    if (this.addUser) {
+      this.users.unshift({...this.addUser})
+      console.log('user = ', this.users.length);
+      
+    }
+  
+    // console.log('users = ', this.users);
   }
 
 

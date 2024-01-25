@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-header',
   template: `
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" routerLink="/users/add"  >Test</a>
+      <a class="navbar-brand" href="#">Test</a>
       <button class="navbar-toggler" routerLink="/users/add" type="button">
         AJouter utilisateur
       </button>
